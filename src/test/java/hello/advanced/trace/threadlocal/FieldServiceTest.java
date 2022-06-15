@@ -1,4 +1,4 @@
-package hello.advanced.trace;
+package hello.advanced.trace.threadlocal;
 
 import hello.advanced.trace.threadlocal.code.FieldService;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +52,7 @@ public class FieldServiceTest {
         threadA.start();
         sleep(200);
         threadB.start();
-        sleep(200);
+        sleep(2000);
         log.info("main exit");
     }
 

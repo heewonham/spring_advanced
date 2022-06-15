@@ -1,24 +1,25 @@
 package hello.advanced.trace.threadlocal;
 
 import hello.advanced.trace.threadlocal.code.FieldService;
+import hello.advanced.trace.threadlocal.code.ThreadLocalService;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Slf4j
-public class FieldServiceTest {
+public class ThreadLocalServiceTest {
 
-    private FieldService fieldService = new FieldService();
+    private ThreadLocalService service = new ThreadLocalService();
 
     @Test
     @DisplayName("동시성 문제가 발생하지 않음")
     void field(){
         log.info("main Strat");
         Runnable userA = () -> {
-          fieldService.logic("userA");
+          service.logic("userA");
         };
         Runnable userB = () -> {
-            fieldService.logic("userB");
+            service.logic("userB");
         };
 
         Thread threadA = new Thread(userA);
@@ -38,10 +39,10 @@ public class FieldServiceTest {
     void field2(){
         log.info("main Strat");
         Runnable userA = () -> {
-            fieldService.logic("userA");
+            service.logic("userA");
         };
         Runnable userB = () -> {
-            fieldService.logic("userB");
+            service.logic("userB");
         };
 
         Thread threadA = new Thread(userA);
@@ -52,7 +53,7 @@ public class FieldServiceTest {
         threadA.start();
         sleep(200);
         threadB.start();
-        sleep(200);
+        sleep(2000);
         log.info("main exit");
     }
 
